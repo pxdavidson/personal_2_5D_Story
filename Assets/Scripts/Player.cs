@@ -7,14 +7,13 @@ public class Player : MonoBehaviour
 {
     // Variables
     [SerializeField] float moveSpeed = 1;
-    [SerializeField] float jumpForce = 1;
-    Rigidbody rigidbody;
+    [SerializeField] float jumpHeight = 1;
+    Rigidbody playerRigidbody;
 
-    
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = this.gameObject.GetComponent<Rigidbody>();
+        playerRigidbody = this.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,7 +34,22 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody.AddForce(Vector3.up * jumpForce);
+            Jump();
         }
+    }
+
+    // Makes the character jump
+    private void Jump()
+    {
+        if (playerRigidbody.velocity.y == 0)
+        {
+              playerRigidbody.velocity = new Vector3(0, jumpHeight, 0);            
+        }
+        else
+        {
+            return;
+        }
+        
+
     }
 }
